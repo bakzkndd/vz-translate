@@ -14,3 +14,9 @@
 .vz-translate-modal-content::-webkit-scrollbar {
   display: block;
 }
+
+.translate-menu {
+  margin: 0px;
+  padding: 0px;
+  margin-top: 2px;
+}

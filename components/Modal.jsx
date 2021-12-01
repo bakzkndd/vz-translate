@@ -4,11 +4,17 @@ import { SelectInput } from "@vizality/components/settings";
 import { close } from "@vizality/modal";
 
 export default memo(
-  ({ getSetting, updateSetting, languageSelectList, This, forceUpdate }) => {
+  ({
+    getSetting,
+    updateSetting,
+    languageSelectList,
+    This,
+    forceUpdate,
+    updateTooltip,
+  }) => {
     const [from, setFrom] = useState(getSetting("from-language", -1));
     const [to, setTo] = useState(getSetting("to-language", 0));
-    console.log(This);
-    console.log(forceUpdate);
+
     return (
       <Modal size={Modal.Sizes.MEDIUM}>
         <Modal.Header>

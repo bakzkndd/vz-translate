@@ -40,10 +40,6 @@ module.exports = class TextContainerButton extends React.PureComponent {
       this.languageNames.push(this.languages[i].name);
       this.languageSelectList.push({ value: i, label: this.languages[i].name });
     }
-
-    console.log(this.languages);
-    console.log(this.languageNames);
-    console.log(this.languageSelectList);
   }
 
   render() {
@@ -53,11 +49,11 @@ module.exports = class TextContainerButton extends React.PureComponent {
     return (
       <>
         <Tooltip
-          text={`Translate text ${
+          text={`Translate Text ${
             !this.languageNames[getSetting("from-language", -1)]
               ? ""
-              : `from ${this.languageNames[getSetting("from-language", -1)]}`
-          } to ${this.languageNames[getSetting("to-language", 0)]}`}
+              : `From ${this.languageNames[getSetting("from-language", -1)]}`
+          } To ${this.languageNames[getSetting("to-language", 0)]}`}
           position="top"
         >
           <Button
@@ -108,21 +104,21 @@ module.exports = class TextContainerButton extends React.PureComponent {
                 translate.url = this.translateAPI;
 
                 let output = await translate(currentText, data);
-                console.log(output);
+
                 // sets your message to the output
                 if (output) currentText = output;
-
-                getModule("sendMessage").sendMessage(
-                  channelId,
-                  {
-                    content: currentText,
-                    invalidEmojis: [],
-                    tts: false,
-                    validNonShortcutEmojis: [],
-                  },
-                  undefined,
-                  {}
-                );
+                if (currentText.length >= 3)
+                  getModule("sendMessage").sendMessage(
+                    channelId,
+                    {
+                      content: currentText,
+                      invalidEmojis: [],
+                      tts: false,
+                      validNonShortcutEmojis: [],
+                    },
+                    undefined,
+                    {}
+                  );
               }
             }}
             onContextMenu={async () => {
@@ -140,13 +136,20 @@ module.exports = class TextContainerButton extends React.PureComponent {
               ));
             }}
           >
-            <div className="contents-18-Yxp button-3AYNKb button-318s1X">
-              <svg className="buttonWrapper-1ZmCpA" width="24px" height="24px">
-                <polygon
-                  fill="currentColor"
-                  transform="translate(-4,-4.4), scale(0.9)"
-                  points="21.1059,7.71462 10.3929,18.4277 18.4277,26.4625 26.4624,18.4277 23.7842,15.7494 18.4277,21.106 15.7494,18.4277 23.7841,10.3929 31.819,18.4277 18.4277,31.8191 5.03626,18.4277 18.4277,5.03633 "
-                />
+            <div className="contents-18-Yxp button-3AYNKb button-318s1X translate-menu">
+              <svg className="buttonWrapper-1ZmCpA" width="32px" height="32px">
+                <g transform="translate(0, -4.4), scale(0.4)">
+                  <path
+                    fill="currentColor"
+                    transform="translate(-4,-4.4)"
+                    d="m 46.4,52.6 c -4.2,-4.1 -7.9,-7.7 -10,-16 H 51.1 V 30.4 H 36.5 v -8.2 h -6.3 v 8.3 H 15.5 v 6.2 h 15 c 0,0 -0.1,1.2 -0.3,2.1 -2.1,8.2 -4.6,13.4 -14.7,18.5 l 2.1,6.2 C 27.2,58.4 32.2,52 34.4,44.9 c 2.1,5.4 5.7,9.8 9.8,13.8 l 2.2,-6.1 z"
+                  />
+                  <path
+                    fill="currentColor"
+                    transform="translate(-4,-4.4)"
+                    d="M 65.8,32.5 H 57.4 L 42.7,73.8 H 49 L 53.2,61.4 H 70 l 4.2,12.4 h 6.3 L 65.8,32.5 z m -10.5,22.7 6.3,-16.5 6.3,16.6 -12.6,-0.1 0,0 z"
+                  />
+                </g>
               </svg>
             </div>
           </Button>
