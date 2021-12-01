@@ -1,0 +1,16 @@
+.vz-translate-modal-warning {
+  background-color: chocolate;
+  padding: 2%;
+  width: 96%;
+  color: var(--header-primary);
+}
+.vz-translate-modal-warning-second {
+  width: 266px !important;
+  border-radius: 3px;
+}
+.vz-translate-modal-content {
+  scrollbar-color: var(--scrollbar-thin-thumb) var(--scrollbar-thin-track);
+}
+.vz-translate-modal-content::-webkit-scrollbar {
+  display: block;
+}
