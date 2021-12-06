@@ -66,11 +66,10 @@ module.exports = class TextContainerButton extends React.PureComponent {
                 "markup-2BOw-j slateTextArea-1Mkdgw fontSize16Padding-3Wk7zP"
               )[0].outerText;
 
-              let channelLink = document.getElementsByClassName(
-                "markup-2BOw-j slateTextArea-1Mkdgw fontSize16Padding-3Wk7zP"
-              )[0].baseURI;
-              let channelLinkArray = channelLink.split("/");
-              let channelId = channelLinkArray[channelLinkArray.length - 1];
+              const { ComponentDispatch } = getModule(
+                ["ComponentDispatch"],
+                false
+              );
 
               if (
                 !currentText.startsWith("/") &&
@@ -108,17 +107,9 @@ module.exports = class TextContainerButton extends React.PureComponent {
                 // sets your message to the output
                 if (output) currentText = output;
                 if (currentText.length >= 3)
-                  getModule("sendMessage").sendMessage(
-                    channelId,
-                    {
-                      content: currentText,
-                      invalidEmojis: [],
-                      tts: false,
-                      validNonShortcutEmojis: [],
-                    },
-                    undefined,
-                    {}
-                  );
+                  ComponentDispatch.dispatchToLastSubscribed("INSERT_TEXT", {
+                    content: (currentText || "").trim(),
+                  });
               }
             }}
             onContextMenu={async () => {
