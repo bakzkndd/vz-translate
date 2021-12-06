@@ -106,10 +106,12 @@ module.exports = class TextContainerButton extends React.PureComponent {
 
                 // sets your message to the output
                 if (output) currentText = output;
-                if (currentText.length >= 3)
+                if (currentText.length >= 3) {
                   ComponentDispatch.dispatchToLastSubscribed("INSERT_TEXT", {
-                    content: (currentText || "").trim(),
+                    content: currentText,
                   });
+                  console.log("replaced!");
+                }
               }
             }}
             onContextMenu={async () => {
